@@ -140,7 +140,20 @@ ImeButton get_ime_button(const CliOptions & options) {
 
     wsmatch match;
     if (regex_search(name, match, options.ime_capture)) {
-      return { match[1], pButton };
+      wstring current_mode = match[1];
+      // 将中文模式转换为英文
+      // if (current_mode == L"中文模式") {
+      //   current_mode = L"Chinese";
+      // } else if (current_mode == L"英语模式") {
+      //   current_mode = L"English";
+      // }
+      // 使用 Unicode 转义序列代替中文字符
+      if (current_mode == L"\u4e2d\u6587\u6a21\u5f0f") { // 中文模式
+        current_mode = L"Chinese";
+      } else if (current_mode == L"\u82f1\u8bed\u6a21\u5f0f") { // 英语模式
+        current_mode = L"English";
+      }
+      return { current_mode, pButton };
     }
   }
   return { L"", nullptr };
@@ -150,8 +163,10 @@ ImeButton get_ime_button(const CliOptions & options) {
 CliOptions chinese_options()
 {
   CliOptions options;
-  options.taskbar_name = L"任务栏";
-  options.ime_capture_re = L"托盘输入指示器\\s+(\\w+)"; //\\s+(\\S+)\\s*.+";
+  // options.taskbar_name = L"任务栏";
+  // options.ime_capture_re = L"托盘输入指示器\\s+(\\w+)"; //\\s+(\\S+)\\s*.+";
+  options.taskbar_name = L"\u4efb\u52a1\u680f"; // 任务栏
+  options.ime_capture_re = L"\u6258\u76d8\u8f93\u5165\u6307\u793a\u5668\\s+(\\w+)"; // 托盘输入指示器
   options.switch_keys = L"shift";
   return options;
 }
