@@ -29,7 +29,7 @@ im-select-mspy 是一个针对微软拼音输入法的输入法切换工具, 它
 ```json
 {
     "vim.autoSwitchInputMethod.enable": true,
-    "vim.autoSwitchInputMethod.defaultIM": "英语模式",
+    "vim.autoSwitchInputMethod.defaultIM": "English",
     "vim.autoSwitchInputMethod.obtainIMCmd": "D:\\workspace\\im-select-mspy\\build\\Release\\im-select-mspy.exe",
     "vim.autoSwitchInputMethod.switchIMCmd": "D:\\workspace\\im-select-mspy\\build\\Release\\im-select-mspy.exe {im}",
 }
@@ -43,5 +43,6 @@ cd build
 cmake .. 
 cmake --build . --config Release
 ```
+
 
 
